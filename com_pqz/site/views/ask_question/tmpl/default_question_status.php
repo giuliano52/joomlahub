@@ -9,9 +9,7 @@ $jinput = JFactory::getApplication()->input;
 $question_index = $jinput->get('id_question', 'default_value', 'filter');
 ?>
 
-
-
-<table>
+table>
     <tr>
         <?php
         foreach ($_SESSION['pqz_question'] as $id => $single_question) {

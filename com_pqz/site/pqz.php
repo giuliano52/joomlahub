@@ -13,8 +13,6 @@ require_once JPATH_COMPONENT.'/lib/csv_gd.class.php';
 require_once JPATH_COMPONENT.'/lib/common.lib.php';
 
 
-
-
 jimport('joomla.application.component.controller');
 
 $controller = JControllerLegacy::getInstance('pqz');
