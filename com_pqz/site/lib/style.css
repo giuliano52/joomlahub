@@ -1,0 +1,67 @@
+/*
+Copyright (C) 2014 test01
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 22-gen-2014, 9.38.47
+    Author     : test01
+*/
+
+body
+{
+    /*background-color:#BFFFDE;*/
+    background-color: #d0e4fe;
+}
+.possible_answer {
+    font-size:200%;
+}
+.question_status {
+    /*	background-color:red; */
+    font-size:100%;
+    vertical-align:middle;
+}
+.question_status a:link {text-decoration:none;}
+.question_status a:visited {text-decoration:none;}
+.question_status a:hover {text-decoration:underline;}
+.question_status a:active {text-decoration:underline;}
+
+
+
+#fancytable
+{
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:100%;
+    border-collapse:collapse;
+}
+#fancytable td, #fancytable th 
+{
+    font-size:1em;
+    border:1px solid #2136C0;
+    padding:3px 7px 2px 7px;
+}
+#fancytable th 
+{
+    font-size:1.1em;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#4362CA;
+    color:#ffffff;
+}
+#fancytable tr.alt td 
+{
+    color:#000000;
+    background-color:#D3D7F3;
+}
