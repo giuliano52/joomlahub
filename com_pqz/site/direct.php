@@ -6,7 +6,7 @@ session_start();
  */
 
 
-$version = "3.201404505.01";
+$version = "3.201404526.01";
 $debug = true;
 ?>
 
