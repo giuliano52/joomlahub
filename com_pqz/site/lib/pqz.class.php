@@ -89,7 +89,7 @@ class pqz {
 
     public function start_quiz($quiz_ini_conf) {
 
-        $this->read_ini_conf('default.ini', $this->configuration['base_data_dir'] . '/conf/');
+        $this->read_ini_conf('default.ini', $this->configuration['base_data_dir'] . '/ini/');
         $this->read_ini_conf($quiz_ini_conf);
         $this->generate_question();
         $this->setSESSIONvariables();
@@ -156,24 +156,13 @@ class pqz {
     }
 
     private function quiz_filter($data_quiz_src, $tags, $min_difficult_level, $max_difficult_level) {
-
-
         $out = array();
         $a_tags = explode('|', $tags);
-
         foreach ($data_quiz_src as $single_quiz) {
-
-
             $difficult_level = !empty($single_quiz['difficult_level']) ? $single_quiz['difficult_level'] : 1;
-
-            //-------------------         DEBUG --------------------------------
-            print_pre($single_quiz); 
-//-------------------         DEBUG --------------------------------
-            
             if (!empty($single_quiz['question']) && !empty($single_quiz['correct_answer'])) {
-
                 if (($difficult_level >= $min_difficult_level) && ($difficult_level <= $max_difficult_level)) {
-
+       
                     if (empty($tags)) {
                         $out[] = $single_quiz;
                     } else {
@@ -217,6 +206,10 @@ class pqz {
             $this->configuration['base_ini_dir'] = $base_ini_dir_original;
             $this->configuration['quiz_ini_conf'] = $quiz_ini_conf;
         }
+        else {
+            die("read_ini_conf: $full_file DONT EXIST");
+        }
+          
 
         require_once(__DIR__ . '/csv_gd.class.php');
         $csv_filename = $this->configuration['base_data_dir'] . '/conf/' . $this->configuration['congratulation_file'];

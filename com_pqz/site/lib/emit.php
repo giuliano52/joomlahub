@@ -27,7 +27,7 @@ function emit_choose_quiz($scan_dir) {
         } elseif ($type == "file") {
             $entry = $item['title'];
 
-            $quiz_icon = isset($item['quiz_icon']) ? $item['quiz_icon'] : $base_img_path.'/quiz.png';
+            $quiz_icon = isset($item['quiz_icon']) ? $item['quiz_icon'] : $base_img_path . '/quiz.png';
             $content .= "<td><img src=\"$quiz_icon\" alt=\"Quiz\" height=\"64\" width=\"64\"></td>";
             $content .= '<td><A href="' . htmlspecialchars($_SERVER["PHP_SELF"]) . "?option=$option&task=start_quiz&quiz_conf=$path\">$entry</A></td>\n";
             $content .= '<td>Avanzate -> TODO</td>';
@@ -185,7 +185,8 @@ function emit_results() {
     $data_quiz = $_SESSION['pqz_question'];
 
     $num_question = count($data_quiz);
-    echo '<table border="1">';
+    echo '<div style="width:100%; background:#F2F2F2">';
+    echo '<table style="border: 1px solid black; width=100%; margin: 0 ; " >';
     echo '<tr ><td>';
     echo '<table border="1">';
     for ($question_index = 0; $question_index < $num_question; $question_index++) {
@@ -220,12 +221,12 @@ function emit_results() {
 
         $img = $_SESSION['pqz_configuration']['congratulation_img'];
         echo "<br>\n";
-        echo "<img src=\"$img\" width=\"1400\"><br>\n";
+        echo "<img src=\"$img\" style=\"max-width:800px;\" ><br>\n";
     }
 
     echo "</td></tr>\n";
     echo "</table>\n";
-
+    echo '<div>';
 
     echo '<a href="' . $_SERVER["PHP_SELF"] . '?task=start_quiz&quiz_conf' . '=' . $_SESSION['pqz_configuration']['quiz_ini_conf'] . '">RICOMINCIA</a> ';
 }
