@@ -188,7 +188,7 @@ function emit_results() {
     echo '<div style="width:100%; background:#F2F2F2">';
     echo '<table style="border: 1px solid black; width=100%; margin: 0 ; " >';
     echo '<tr ><td>';
-    echo '<table border="1">';
+    echo '<table style="border: 1px solid black; width=100%;">';
     for ($question_index = 0; $question_index < $num_question; $question_index++) {
         if ($data_quiz[$question_index]['response_type'] == "options") {
             $answer = $data_quiz[$question_index]['possible_answer'][$data_quiz[$question_index]["answered_question"]];

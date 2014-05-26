@@ -5,7 +5,6 @@ session_start();
  * TODO: implementare il campo if_correct and if_wrong nei risultati
  */
 
-
 $version = "3.201404526.01";
 $debug = true;
 ?>
