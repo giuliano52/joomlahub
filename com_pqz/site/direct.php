@@ -26,9 +26,6 @@ $debug = true;
         require_once('lib/pqz.class.php');
         require_once('lib/emit.php');
 
-
-
-
         $task = isset($_GET['task']) ? filter_input(INPUT_GET, 'task', FILTER_SANITIZE_ENCODED) : "choose_quiz";
         $quiz_dir = isset($_GET['quiz_dir']) ? filter_input(INPUT_GET, 'quiz_dir', FILTER_SANITIZE_FULL_SPECIAL_CHARS) : '';
         $quiz_conf = isset($_GET['quiz_conf']) ? filter_input(INPUT_GET, 'quiz_conf', FILTER_SANITIZE_FULL_SPECIAL_CHARS) : '';

@@ -11,16 +11,14 @@ class pqz {
     public $debug = false;
 
     function __construct() {
-        $this->configuration['base_data_dir'] = 'data'; 
-                                                /* base data for the configuartion files 
-                                                 * must have the following folder
-                                                 *      csv: all the csv file
-                                                 *      ini: all the information for the ini quiz
-                                                 *      conf: all the configuration needed
-                                                 */ 
+        $this->configuration['base_data_dir'] = 'data';
+        /* base data for the configuartion files 
+         * must have the following folder
+         *      csv: all the csv file
+         *      ini: all the information for the ini quiz
+         *      conf: all the configuration needed
+         */
         $this->configuration['base_ini_dir'] = 'data/ini';    // the base configuration for all ini files
-     
-   
     }
 
     public function scanIniDir($dir) {
@@ -91,7 +89,7 @@ class pqz {
 
     public function start_quiz($quiz_ini_conf) {
 
-        $this->read_ini_conf('default.ini',$this->configuration['base_data_dir'].'/conf/');
+        $this->read_ini_conf('default.ini', $this->configuration['base_data_dir'] . '/conf/');
         $this->read_ini_conf($quiz_ini_conf);
         $this->generate_question();
         $this->setSESSIONvariables();
@@ -107,8 +105,10 @@ class pqz {
 
         require_once(__DIR__ . '/csv_gd.class.php');
         $csv_filename = $this->configuration['base_data_dir'] . '/csv/' . $this->configuration['csv_input'];
+
         $data_quiz_src_obj = new csv_gd($csv_filename);
         $data_quiz_src_orig = $data_quiz_src_obj->csv_to_array();
+
 
         // filter unwanted question (tags, diff level, void )
         $data_quiz_src_filtered = $this->quiz_filter($data_quiz_src_orig, $this->configuration['tags'], $this->configuration['min_diffucult_level'], $this->configuration['max_diffucult_level']);
@@ -166,7 +166,10 @@ class pqz {
 
             $difficult_level = !empty($single_quiz['difficult_level']) ? $single_quiz['difficult_level'] : 1;
 
-
+            //-------------------         DEBUG --------------------------------
+            print_pre($single_quiz); 
+//-------------------         DEBUG --------------------------------
+            
             if (!empty($single_quiz['question']) && !empty($single_quiz['correct_answer'])) {
 
                 if (($difficult_level >= $min_difficult_level) && ($difficult_level <= $max_difficult_level)) {
@@ -278,7 +281,7 @@ class pqz {
 
             $single_quiz['all_question'] = explode('|', $single_quiz['question']);
             shuffle($single_quiz['all_question']);
-            
+
             $single_quiz['question'] = $single_quiz['all_question'][0];
 
 

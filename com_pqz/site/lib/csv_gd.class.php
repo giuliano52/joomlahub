@@ -22,7 +22,6 @@ class csv_gd {
         // convert a csv file to an array
         $delimiter = $this->delimiter;
         $filename = $this->csv_filename;
-
         if (!file_exists($filename)) {
             echo "CSV_GD: $filename NOT FOUND";
             return FALSE;
@@ -42,6 +41,7 @@ class csv_gd {
                 } else {
                     if (!empty($row[0])) {
                         $data[] = array_combine($header, $row);
+                      
                     }
                 }
             }
