@@ -2,7 +2,7 @@
 
 /*
  * Class to edit CSV
- *  v 20140402.01
+ *  v 20140921.01
  */
 
 class csv_gd {
@@ -23,7 +23,7 @@ class csv_gd {
         $delimiter = $this->delimiter;
         $filename = $this->csv_filename;
         if (!file_exists($filename)) {
-            echo "CSV_GD: $filename NOT FOUND";
+            echo "CSV_GD: $filename NOT FOUND <br> realpath: ".$this->resolveFilename(__DIR__.'/'.$filename);
             return FALSE;
         } elseif (!is_readable($filename)) {
             echo "CSV_GD: $filename NOT READABLE";
@@ -41,7 +41,6 @@ class csv_gd {
                 } else {
                     if (!empty($row[0])) {
                         $data[] = array_combine($header, $row);
-                      
                     }
                 }
             }
@@ -63,18 +62,33 @@ class csv_gd {
 
     public function array_to_csv($array) {
         // convert an csv to an array
-		
+
         $filename = $this->csv_filename;
         $fp = fopen($filename, "wb");
-		ksort($array[0]);
+        ksort($array[0]);
         fputcsv($fp, array_keys($array[0]), $this->delimiter);
         foreach ($array as $fields) {
-			ksort($fields);
+            ksort($fields);
             fputcsv($fp, $fields, $this->delimiter);
         }
         fclose($fp);
     }
 
-  
-}
+    private function resolveFilename($filename) {
+        //mostra la directory reale (un po' come realpath() solo che funziona anche con file non esistenti)
+        $filename = str_replace('//', '/', $filename);
+        $parts = explode('/', $filename);
+        $out = array();
+        foreach ($parts as $part) {
+            if ($part == '.')
+                continue;
+            if ($part == '..') {
+                array_pop($out);
+                continue;
+            }
+            $out[] = $part;
+        }
+        return implode('/', $out);
+    }
 
+}
