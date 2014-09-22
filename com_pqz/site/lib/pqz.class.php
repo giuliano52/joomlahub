@@ -26,7 +26,7 @@ class pqz {
          * scan ini dir and return an array with the information for that particular dir
          * TODO: sort by type and by name
          */
-
+        
         //prevent ../../../ attach
         $full_data_dir = realpath($this->configuration['base_ini_dir']);
         $full_dir_unsafe = realpath($full_data_dir . '/' . $dir);
@@ -34,7 +34,7 @@ class pqz {
 
         $a_out = array();
         if (!is_dir($full_dir_unsafe)) {
-            die("Directory $dir Not Found / full dir $full_dir");
+            die("pqz.class.php: Directory $dir Not Found / full dir $full_dir");
         }
 
         $scanned_directory = array_diff(scandir($full_dir), array('..', '.'));
