@@ -5,8 +5,12 @@ session_start();
  * TODO: implementare il campo if_correct and if_wrong nei risultati
  */
 
-$version = "3.201404526.01";
+$version = "3.20140922.01";
 $debug = true;
+
+$quiz_site = 'produzione';   	// visualizza i quiz di produzione
+//$quiz_site = 'test'				// visualizza i quiz di test
+
 ?>
 
 <html>
@@ -34,7 +38,17 @@ $debug = true;
         $quiz = new pqz();
         $base_datahub = '../../../datahub/pqz/';
         $quiz->configuration['base_data_dir'] = $base_datahub;
-        $quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/prod';
+        
+		
+		if ($quiz_site=='test') 
+		{
+			$quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/test';
+		}
+		else {
+			$quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/prod';		
+		}
+
+		
 
 
         switch ($task) {

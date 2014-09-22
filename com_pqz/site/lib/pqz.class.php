@@ -1,9 +1,13 @@
 <?php
 
 /*
+ * Version 20140922.01
+ * - delete empty question or empty answer (input file has multiple |||| )  for example from generated OTD
  * Version 20140327.02
+ *
  */
 
+ 
 class pqz {
 
     public $configuration;
@@ -70,7 +74,6 @@ class pqz {
                 }
             }
         }
-
 
         // --- sort the multidimensional array ---
         // Obtain a list of columns
@@ -158,6 +161,9 @@ class pqz {
     private function quiz_filter($data_quiz_src, $tags, $min_difficult_level, $max_difficult_level) {
         $out = array();
         $a_tags = explode('|', $tags);
+		// remove all empty values 
+		$a_tags = array_filter( $a_tags);
+		
         foreach ($data_quiz_src as $single_quiz) {
             $difficult_level = !empty($single_quiz['difficult_level']) ? $single_quiz['difficult_level'] : 1;
             if (!empty($single_quiz['question']) && !empty($single_quiz['correct_answer'])) {
@@ -222,7 +228,7 @@ class pqz {
         $_SESSION['pqz_configuration'] = $this->configuration;
         $_SESSION['pqz_question'] = $this->question;
     }
-
+	
     private function quiz_generate($data_quiz_src) {
         // generate question correct response and so on ... 
         // extract all possible answer
@@ -238,6 +244,7 @@ class pqz {
             shuffle($all_possible_answer);
 
             $single_quiz['all_correct_answer'] = explode('|', $single_quiz['correct_answer']);
+			
             $single_quiz['possible_answer'] = array($single_quiz['all_correct_answer'][0]);
 
             $single_quiz['response_type'] = !empty($single_quiz['response_type']) ? $single_quiz['response_type'] : $this->configuration['default_response_type'];
@@ -245,6 +252,11 @@ class pqz {
             //  add wrong answer to $possible_answer from input data
             if (isset($single_quiz["wrong_answer"])) {
                 $possible_wrong_answer = explode('|', $single_quiz["wrong_answer"]);
+				
+				//remove eventually emtpy element
+				$single_quiz['possible_answer'] = array_filter($single_quiz['possible_answer']);
+				
+				
                 $single_quiz['possible_answer'] = array_merge($single_quiz['possible_answer'], $possible_wrong_answer);
             }
 
@@ -273,6 +285,10 @@ class pqz {
             shuffle($single_quiz['possible_answer']);
 
             $single_quiz['all_question'] = explode('|', $single_quiz['question']);
+			
+			// remove all empty values 
+			$single_quiz['all_question'] = array_filter( $single_quiz['all_question']);
+			
             shuffle($single_quiz['all_question']);
 
             $single_quiz['question'] = $single_quiz['all_question'][0];
