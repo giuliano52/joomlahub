@@ -12,7 +12,7 @@ $question = str_replace("\n", "<br>\n", $single_quiz_data['question']);
 <?= $this->loadTemplate("question_status"); ?>
 
 <div style="border: 1px solid black;">
-    <form action="<?= JRoute::_("index.php"); ?>" method="get" >
+    <form action="<?= JRoute::_("index.php"); ?>" method="get" autocomplete="off">
 
         <table style="table-layout:fixed; width:100%;	">
             <tr>

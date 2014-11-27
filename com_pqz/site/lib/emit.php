@@ -62,7 +62,7 @@ function emit_questions($starting_question = 0) {
     }
 
     echo '
-<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get">
+<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get" autocomplete="off" >
 <table border="1">
 ';
     emit_single_question($starting_question);
