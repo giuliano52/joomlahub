@@ -2,9 +2,9 @@
 <extension type="component" version="1.0.0" method="upgrade">
     <name>PQZ</name>
     <!-- The following elements are optional and free of formatting conttraints -->
-    <creationDate>September 2014</creationDate>
+    <creationDate>November 2014</creationDate>
     <author>Giuliano 52</author>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <description>PQZ a quiz generator for joomla</description>
  
     <files folder="site">
