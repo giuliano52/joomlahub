@@ -5,8 +5,8 @@ session_start();
  * TODO: implementare il campo if_correct and if_wrong nei risultati
  */
 
-$version = "3.20141127.01";
-$debug = true;
+$version = "3.20150323.01";
+$debug = false;
 
 $quiz_site = 'produzione';   	// visualizza i quiz di produzione
 //$quiz_site = 'test'				// visualizza i quiz di test
@@ -36,6 +36,7 @@ $quiz_site = 'produzione';   	// visualizza i quiz di produzione
 
         $base_img_path = 'img';
         $quiz = new pqz();
+		$quiz->debug = $debug;
         $base_datahub = '../../../datahub/pqz/';
         $quiz->configuration['base_data_dir'] = $base_datahub;
         

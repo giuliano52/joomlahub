@@ -1,24 +1,26 @@
-#PQZ
+= PQZ
 
 solo csv file
 solo ini file
 
-#definizioni 
-##variabili 
+== definizioni 
+
+=== variabili 
+
 $configuration : contiene le configurazioni del quiz, viene letta da un file ini o impostata direttamente $this->configuration['parametro']= 'valore'
                 i pararametri sono:
                 - base_ini_dir  : la directory base dove si trovano i file ini (default data/ini)
 
                
 
-##funzioni
+=== funzioni
 -getIniConf(inifile)
 -changeConf(parametro,valore)
 -scanIniDir(dir) -> array [ type (inifile|dir) , name (nome file o nome dir), description (descrione contenuta nell'ini file) ]
 -initializeQuiz() -> array con le domande , ma modifica anche la $this->configuration 
 
 
-#CSV Format:
+== CSV Format:
 see readme.md in datahub/pqz
 
 

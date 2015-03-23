@@ -111,10 +111,11 @@ function emit_single_question($question_index) {
     } else {
         $possible_answer = isset($single_quiz_data['answered_question']) ? $single_quiz_data['answered_question'] : "";
         $opt = "";
-        /*
+        /*   
          *     $opt = "tabindex=$tab_index ";
-          if ($tab_index == 1)
-          $opt .= "autofocus"; */
+          if ($tab_index == 1) */
+		  
+        $opt .= "autofocus";  // Imposto l'autofocus sulla domanda
 
         echo "<input type=\"text\" name=\"q_$question_index\" value=\"$possible_answer\" $opt >";
     }

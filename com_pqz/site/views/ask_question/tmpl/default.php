@@ -47,7 +47,7 @@ $question = str_replace("\n", "<br>\n", $single_quiz_data['question']);
                     } else {
                         $possible_answer = isset($single_quiz_data['answered_question']) ? $single_quiz_data['answered_question'] : "";
 
-                        echo "<input type=\"text\" name=\"q_{$this->question_index}\" value=\"$possible_answer\"  >";
+                        echo "<input type=\"text\" name=\"q_{$this->question_index}\" value=\"$possible_answer\" autofocus >";
                     }
                     ?>
 
