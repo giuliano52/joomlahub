@@ -7,7 +7,6 @@
  *
  */
 
- 
 class pqz {
 
     public $configuration;
@@ -30,7 +29,7 @@ class pqz {
          * scan ini dir and return an array with the information for that particular dir
          * TODO: sort by type and by name
          */
-        
+
         //prevent ../../../ attach
         $full_data_dir = realpath($this->configuration['base_ini_dir']);
         $full_dir_unsafe = realpath($full_data_dir . '/' . $dir);
@@ -96,10 +95,6 @@ class pqz {
         $this->read_ini_conf($quiz_ini_conf);
         $this->generate_question();
         $this->setSESSIONvariables();
-        if ($this->debug) {
-            print_pre($_SESSION['pqz_configuration']);
-            print_pre($_SESSION['pqz_question']);
-        }
     }
 
     private function generate_question() {
@@ -111,7 +106,7 @@ class pqz {
 
         $data_quiz_src_obj = new csv_gd($csv_filename);
         $data_quiz_src_orig = $data_quiz_src_obj->csv_to_array();
-	
+
 
 
         // filter unwanted question (tags, diff level, void )
@@ -142,7 +137,7 @@ class pqz {
         }
         $this->question = array_slice($data_quiz_src, 0, $this->configuration['max_question_total']);
 
-
+        $this->configuration['debug']=$this->debug;
 
         // return $this->quiz_questions;
     }
@@ -162,14 +157,14 @@ class pqz {
     private function quiz_filter($data_quiz_src, $tags, $min_difficult_level, $max_difficult_level) {
         $out = array();
         $a_tags = explode('|', $tags);
-		// remove all empty values 
-		$a_tags = array_filter( $a_tags);
-		
+        // remove all empty values 
+        $a_tags = array_filter($a_tags);
+
         foreach ($data_quiz_src as $single_quiz) {
             $difficult_level = !empty($single_quiz['difficult_level']) ? $single_quiz['difficult_level'] : 1;
             if (!empty($single_quiz['question']) && !empty($single_quiz['correct_answer'])) {
                 if (($difficult_level >= $min_difficult_level) && ($difficult_level <= $max_difficult_level)) {
-       
+
                     if (empty($tags)) {
                         $out[] = $single_quiz;
                     } else {
@@ -212,16 +207,17 @@ class pqz {
             // prevent change to $this->configuration['base_ini_dir'] from ini.file restoring original one
             $this->configuration['base_ini_dir'] = $base_ini_dir_original;
             $this->configuration['quiz_ini_conf'] = $quiz_ini_conf;
-        }
-        else {
+        } else {
             die("read_ini_conf: $full_file DONT EXIST");
         }
-          
+
 
         require_once(__DIR__ . '/csv_gd.class.php');
         $csv_filename = $this->configuration['base_data_dir'] . '/conf/' . $this->configuration['congratulation_file'];
         $csv_file = new csv_gd($csv_filename);
         $this->configuration['congratulation_img'] = $csv_file->pick_one_field_random('url');
+        $this->configuration['time_start'] = time();
+        $this->configuration['time_end'] = 0;
     }
 
     private function setSESSIONvariables() {
@@ -229,7 +225,7 @@ class pqz {
         $_SESSION['pqz_configuration'] = $this->configuration;
         $_SESSION['pqz_question'] = $this->question;
     }
-	
+
     private function quiz_generate($data_quiz_src) {
         // generate question correct response and so on ... 
         // extract all possible answer
@@ -245,7 +241,7 @@ class pqz {
             shuffle($all_possible_answer);
 
             $single_quiz['all_correct_answer'] = explode('|', $single_quiz['correct_answer']);
-			
+
             $single_quiz['possible_answer'] = array($single_quiz['all_correct_answer'][0]);
 
             $single_quiz['response_type'] = !empty($single_quiz['response_type']) ? $single_quiz['response_type'] : $this->configuration['default_response_type'];
@@ -253,11 +249,11 @@ class pqz {
             //  add wrong answer to $possible_answer from input data
             if (isset($single_quiz["wrong_answer"])) {
                 $possible_wrong_answer = explode('|', $single_quiz["wrong_answer"]);
-				
-				//remove eventually emtpy element
-				$single_quiz['possible_answer'] = array_filter($single_quiz['possible_answer']);
-				
-				
+
+                //remove eventually emtpy element
+                $single_quiz['possible_answer'] = array_filter($single_quiz['possible_answer']);
+
+
                 $single_quiz['possible_answer'] = array_merge($single_quiz['possible_answer'], $possible_wrong_answer);
             }
 
@@ -286,10 +282,10 @@ class pqz {
             shuffle($single_quiz['possible_answer']);
 
             $single_quiz['all_question'] = explode('|', $single_quiz['question']);
-			
-			// remove all empty values 
-			$single_quiz['all_question'] = array_filter( $single_quiz['all_question']);
-			
+
+            // remove all empty values 
+            $single_quiz['all_question'] = array_filter($single_quiz['all_question']);
+
             shuffle($single_quiz['all_question']);
 
             $single_quiz['question'] = $single_quiz['all_question'][0];

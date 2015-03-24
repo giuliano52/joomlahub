@@ -23,7 +23,7 @@ defined('_JEXEC') or die('Restricted access');
             <?php
             if ($item['type'] == 'dir') {
                 ?>
-            <td><img src="<?= Juri::base() ?>components/com_pqz/img/Blue_folder_seth_yastrov_01-48.png" ></td>
+                <td><img src="<?= Juri::base() ?>components/com_pqz/img/Blue_folder_seth_yastrov_01-48.png" ></td>
                 <td>
 
                     <A href="<?= JRoute::_("index.php?option=com_pqz&view=choose_quiz&quiz_dir=" . $item['path']); ?>">
@@ -53,4 +53,17 @@ defined('_JEXEC') or die('Restricted access');
         ?>
 </table>
 
+<div style="font-size: x-small;">
+    Version <?= $this->data['version'] ?>
+</div>
 
+
+
+
+<?php
+// if debug
+if ($_SESSION['pqz_configuration']['debug']) {
+    print_pre($_SESSION['pqz_configuration']);
+    print_pre($_SESSION['pqz_question']);
+}
+?>

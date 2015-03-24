@@ -3,6 +3,12 @@
 class PqzModelshow_results extends JModelItem {
 
     public function quiz_check_answer() {
+        
+        //verifico che il end time non sia già impostato 
+        if ($_SESSION['pqz_configuration']['time_end']==0) {
+            $_SESSION['pqz_configuration']['time_end']=time();
+        }
+        
         $num_correct_answer = 0;
         foreach ($_SESSION['pqz_question'] as $key => $data_single_quiz) {
             $all_right_question = array();
@@ -18,6 +24,11 @@ class PqzModelshow_results extends JModelItem {
             }
         }
         $_SESSION['pqz_configuration']['num_correct_answer'] = $num_correct_answer;
+        
+        if($_SESSION['pqz_configuration']['debug']) {
+            print_pre($_SESSION['pqz_configuration']);
+            print_pre($_SESSION['pqz_question']);
+        }
     }
 
 }

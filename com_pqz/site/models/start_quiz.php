@@ -7,8 +7,9 @@ class PqzModelstart_quiz extends JModelItem {
         $quiz->debug = false;
         $base_datahub = JPATH_COMPONENT . '/../../../datahub/pqz/';
         $quiz->configuration['base_data_dir'] = $base_datahub;
+        
         $quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/prod';
-
+    //    $quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/test';
 
         $quiz->start_quiz($quiz_conf);
     }

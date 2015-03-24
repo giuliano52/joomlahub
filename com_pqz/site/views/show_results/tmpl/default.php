@@ -81,7 +81,13 @@ $num_question = count($data_quiz);
     </div>
 
 </div>
-
+<div>
+    <?= JText::_('COM_PQZ_QUIZ_ENDED_IN'); ?>  
+    <?php
+    echo ($_SESSION['pqz_configuration']['time_end'] - $_SESSION['pqz_configuration']['time_start'] )
+    ?>
+    <?= JText::_('COM_PQZ_SECONDS'); ?>  
+</div>
 <a href="<?= JRoute::_("index.php?task=start_quiz&quiz_conf={$_SESSION['pqz_configuration']['quiz_ini_conf']}") ?>"> 
     <?= JText::_('COM_PQZ_RESTART_QUIZ'); ?>
 

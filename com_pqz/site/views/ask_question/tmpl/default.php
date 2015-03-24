@@ -90,3 +90,11 @@ $question = str_replace("\n", "<br>\n", $single_quiz_data['question']);
 
 </div>
 
+
+<?php
+// if debug
+if ($_SESSION['pqz_configuration']['debug']) {
+    print_pre($_SESSION['pqz_configuration']);
+    print_pre($_SESSION['pqz_question']);
+}
+?>

@@ -1,9 +1,14 @@
 = joomlahub
 
-Componenti Joomla
+== Componenti Joomla
 
 * pqz: Quiz per tutti
 
+
+== Note
+
+per lo sviluppo: installate il componente in joomla e poi fare un lync simbolico con la certella in questa cartella. 
+é necessario fare anche un lync simbolico al file manifesto xml (ed pqz.xml) nella cartella admin. In questo modo il programma può interrogare la versione nel file xml
 
 
 

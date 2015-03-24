@@ -14,14 +14,15 @@ class PqzModelchoose_quiz extends JModelItem {
     public function choose_quiz($quiz_dir = '') {
 
         $quiz = new pqz();
-        $base_datahub = JPATH_COMPONENT.'/../../../datahub/pqz/';
+        $quiz->debug=false;
+        $base_datahub = JPATH_COMPONENT . '/../../../datahub/pqz/';
         $quiz->configuration['base_data_dir'] = $base_datahub;
         $quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/prod';
-//        $quiz->configuration['base_ini_dir'] = JPATH_COMPONENT . '/data/ini/prod';
-//        $quiz->configuration['base_conf_dir'] = JPATH_COMPONENT . '/data/conf';
+     //   $quiz->configuration['base_ini_dir'] = $base_datahub . 'ini/test';
 
         $scan_dir = $quiz->scanIniDir($quiz_dir);
         $this->Items = $scan_dir;
+
         return $scan_dir;
     }
 

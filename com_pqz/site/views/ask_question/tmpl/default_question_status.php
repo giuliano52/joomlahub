@@ -43,3 +43,39 @@ $question_index = $jinput->get('id_question', 'default_value', 'filter');
         ?>
     </tr>
 </table>
+
+<script>
+
+    var server_now = <?php echo time(); ?>;
+    var client_now = Math.floor(Date.now() / 1000);
+    var delta = -client_now + server_now;
+
+    function showRemaining()
+    {
+
+        var countdown = document.getElementById('show_time');
+        countdown.innerHTML = '';
+        countdown.innerHTML += delta + Math.floor(Date.now() / 1000) -<?= $_SESSION['pqz_configuration']['time_start'] ?>;
+    }
+
+    timer = setInterval(showRemaining, 100);
+</script>
+
+<?php
+// show_time
+if ($_SESSION['pqz_configuration']['show_time']) {
+    
+    echo JText::_('COM_PQZ_TIME_ELAPSED');
+    ?>
+    
+<span id="show_time">
+    <?php
+    echo(time()-$_SESSION['pqz_configuration']['time_start']);
+    ?>
+    
+</span>
+
+    <?php
+      echo JText::_('COM_PQZ_SECONDS');
+}
+?>
